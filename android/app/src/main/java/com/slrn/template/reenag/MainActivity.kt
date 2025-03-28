@@ -1,4 +1,4 @@
-package com.social_login_template_react_native
+package com.slrn.template.reenag
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

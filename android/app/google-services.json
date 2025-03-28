@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "124571922268",
+    "project_id": "social-login-template",
+    "storage_bucket": "social-login-template.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124571922268:android:b09c2781a77905f3dadb99",
+        "android_client_info": {
+          "package_name": "com.slrn.template.reenag"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBigyAKdqksjg_rUh1Y_jaoOIJZUwS5o2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
