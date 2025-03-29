@@ -5,7 +5,7 @@
  * @format
  */
 
-import "./global.css"
+import "./global.css";
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { verifyInstallation } from 'nativewind';
