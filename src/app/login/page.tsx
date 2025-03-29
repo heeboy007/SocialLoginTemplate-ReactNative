@@ -5,10 +5,11 @@ import { useAuthContext } from "../../context/AuthContext";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../context/RootNavigator";
+import GoogleButton from "../../context/auth/buttons/GoogleButton";
 
 function Connection(): React.JSX.Element {
     const [ dest, setDest ] = useState("192.168.152.38:8080");
-    const { login, is_login, social_result } = useAuthContext();
+    const { is_login, social_result } = useAuthContext();
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
     useEffect(() => {
@@ -26,15 +27,8 @@ function Connection(): React.JSX.Element {
             <Text className="mx-auto my-5 font-bold text-center text-base color-slate-600 max-w-[50vw]">
                 {JSON.stringify(social_result)}
             </Text>
-
             
-            <Pressable 
-                className="bg-[#1E90FF] mx-auto w-[80vw] h-[7vw] rounded-3xl flex justify-center items-center" 
-                onPress={() => {
-                    login("google")
-                }}>
-                <Text className="text-2xl font-base text-white">Google</Text>
-            </Pressable>
+            <GoogleButton/>
         </View>
     </SafeAreaView>
 }
