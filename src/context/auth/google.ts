@@ -5,11 +5,6 @@ import {
     statusCodes,
 } from '@react-native-google-signin/google-signin';
 import { SignInResult } from './signInResult';
-import { web_client_oauth } from '../../asset/const';
-
-GoogleSignin.configure({
-    webClientId: web_client_oauth
-});
 
 // Somewhere in your code
 function googleSignIn(): Promise<SignInResult> {

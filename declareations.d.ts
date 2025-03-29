@@ -7,4 +7,5 @@ declare module "*.svg" {
 
 declare module '@env' {
     export const GOOGLE_WEB_OAUTH: string;
+    export const GOOGLE_IOS_OAUTH: string;
 }
