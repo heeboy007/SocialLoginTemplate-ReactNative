@@ -12,9 +12,15 @@
     "eject": "react-native eject"
   },
   "dependencies": {
+    "@react-native-google-signin/google-signin": "^13.2.0",
     "@react-native-seoul/kakao-login": "^5.4.1",
+    "@react-navigation/stack": "^7.2.3",
+    "@tanstack/react-query": "^5.69.3",
+    "nativewind": "^4.1.23",
     "react": "19.0.0",
-    "react-native": "0.78.1"
+    "react-native": "0.78.1",
+    "react-native-safe-area-context": "^5.3.0",
+    "react-native-svg": "^15.11.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
