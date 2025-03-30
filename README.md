@@ -39,8 +39,8 @@ GOOGLE_WEB_OAUTH=[your web ouath client id]
 GOOGLE_IOS_OAUTH=[your ios ouath client id]
 ```
 
-## Step 2: Setup Kakao
-Here is the best example of how to do this: [Kakao React Native](https://github.com/crossplatformkorea/react-native-kakao-login)
+## Step 2: Setup [Kakao React Native](https://github.com/crossplatformkorea/react-native-kakao-login)
 
-### 2-1. Make a app on kakao dev console
-Dev console is [here](https://developers.kakao.com/console/app)
+### 2-1. Make a app on [kakao dev console](https://developers.kakao.com/console/app)
+
+### 2-2. Follow the instructions of [kakao login prerequisite](https://developers.kakao.com/docs/latest/ko/kakaologin/prerequisite)

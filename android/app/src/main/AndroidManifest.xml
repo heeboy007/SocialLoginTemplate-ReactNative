@@ -2,6 +2,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <meta-data
+        android:name="com.kakao.sdk.AppKey"
+        android:value="@string/kakao_app_key" />
+
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
@@ -10,6 +14,7 @@
       android:allowBackup="false"
       android:theme="@style/AppTheme"
       android:supportsRtl="true">
+      
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
@@ -31,9 +36,9 @@
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
 
-            <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+            <!-- Redirect URI: "kakaof5cf66291e82b2e229516da69751d152://oauth“ -->
             <data android:host="oauth"
-                android:scheme="kakao{카카오 네이티브 앱 key를 입력해주세요}" />
+                android:scheme="kakaof5cf66291e82b2e229516da69751d152" />
         </intent-filter>
       </activity>
     </application>

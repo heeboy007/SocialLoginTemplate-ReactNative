@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">social_login_template_react_native</string>
+    <string name="kakao_app_key">f5cf66291e82b2e229516da69751d152</string>
 </resources>

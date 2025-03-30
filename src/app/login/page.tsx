@@ -6,10 +6,11 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../context/RootNavigator";
 import GoogleButton from "../../context/auth/buttons/GoogleButton";
+import KakaoButton from "../../context/auth/buttons/KakaoButton";
+import LogoutButton from "../../context/auth/buttons/LogoutButton";
 
 function Connection(): React.JSX.Element {
-    const [ dest, setDest ] = useState("192.168.152.38:8080");
-    const { is_login, social_result } = useAuthContext();
+    const { is_login, social_result, login_message } = useAuthContext();
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
     useEffect(() => {
@@ -27,8 +28,14 @@ function Connection(): React.JSX.Element {
             <Text className="mx-auto my-5 font-bold text-center text-base color-slate-600 max-w-[50vw]">
                 {JSON.stringify(social_result)}
             </Text>
+
+            <Text className="mx-auto my-5 font-bold text-center text-base color-slate-600 max-w-[50vw]">
+                {login_message}
+            </Text>
             
             <GoogleButton/>
+            <KakaoButton/>
+            <LogoutButton/>
         </View>
     </SafeAreaView>
 }
