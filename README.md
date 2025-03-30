@@ -63,8 +63,9 @@ In : `android/app/build.gradle`
 com.slrn.template.reenag -> com/slrn/template/reenag
 ```
 `android/app/src/main/java/{package directoy}/Main~~~.kt`처럼, 중간 디렉토리를 수정하시면 되겠습니다.
+![Image](https://github.com/user-attachments/assets/1210fd7f-d7a6-49f8-8188-2a9d932c1666)
 
-### 1-2. 안드로이드 키스토어 해시 : `keystore hash`
+### 1-3. 안드로이드 키스토어 해시 : `keystore hash`
 
 여기서는 리액트 네이티브의 기본 제공 debug.keystore의 해시 값을 이용합니다. 하지만 release를 한다거나 debug를 할때, 다른 keystore를 생성하셔야 합니다.
 다음과 같이 2종류의 해쉬 값을 메모합니다.
@@ -87,9 +88,9 @@ keytool -list -v -alias androiddebugkey -keystore android/app/debug.keystore -st
 keytool -exportcert -alias {키 스토어 alias} -keystore {키 스토어 실제 경로} -storepass {스토어 비밀번호} -keypass {키 비밀번호} | grep SHA1
 ```
 
-### 1-3. iOS 번들 이름 : `bundle name`
+### 1-4. iOS 번들 이름 : `bundle name`
 이 정보는 XCode에서 다음과 같이 세팅하면 됩니다.
-TODO : photo
+![Image](https://github.com/user-attachments/assets/3909a310-a036-4a04-9653-1c54e5b112c0)
 
 ## Step 2: 구글 로그인 세팅하기
 
@@ -97,10 +98,10 @@ TODO : photo
 파일 두 개를 만들어서 다운로드 하시는게 이번 목표입니다. **`google-services.json`** 는 안드로이드, **`GoogleService-Info.plist`** 는 iOS 세팅에 쓰입니다.
 
 우선, Android 앱을 새로 세팅합니다. 앞에서 세팅한 `package name`, `keystore hash`를 입력하시면 됩니다. 거기서 **`google-services.json`** 를 다운로드 합니다.\
-TODO : Photo
+![Image](https://github.com/user-attachments/assets/fdca4e0b-2b10-4727-82f8-330253abcfd5)
 
 두번째로, iOS 앱을 새로 세팅합니다. 앞에서 세팅한 `bundle name`을 입력하시면 됩니다. 거기서 **`GoogleService-Info.plist`** 를 다운로드 합니다.\
-TODO : Photo
+![Image](https://github.com/user-attachments/assets/48f9f9ad-fb30-49a8-9119-a7a093e760f2)
 
 이제 다음 경로에 가서 파일들을 바꿔치기 하시면 됩니다.\
 **`GoogleService-Info.plist`** -> `ios/social_login_template_react_native/GoogleService-Info.plist`\
@@ -116,10 +117,13 @@ TODO : Photo
 이 값은 차후에 idToken값을 가져오기 위해서 쓰입니다.\
 TODO : Photo
 
-마지막으로, iOS 클라이언트를 새로 세팅합니다. 앞에서 세팅한 `bundle name`을 입력하시면 됩니다. 이후 `google iOS OAuth client id`를 메모합니다.\
+세번째로, iOS 클라이언트를 새로 세팅합니다. 앞에서 세팅한 `bundle name`을 입력하시면 됩니다. 이후 `google iOS OAuth client id`를 메모합니다.\
 (이 `google iOS OAuth client id` 는 차후 4-1에서도 쓰이므로 따로 메모해두시는 걸 추천해드립니다.)
 
-두개의 id를 .env파일을 생성하여 다음과 같이 적어 넣습니다.
+전부 세팅 된 모습 :
+![Image](https://github.com/user-attachments/assets/96732634-798e-41d4-82a5-b5a2021e3b8e)
+
+마지막으로 앞에서 메모한 두 개의 id를 .env파일을 생성하여 다음과 같이 적어 넣습니다.
 .env
 ```diff
 +GOOGLE_WEB_OAUTH=[google Web OAuth client id]
@@ -132,17 +136,15 @@ TODO : Photo
 생성한 후, `kakao native key`를 메모합니다.
 
 ### 2-2. Android 활성화(`package name`, `keystore hash`)
-TODO : photo
-
 ### 2-3. iOS 활성화(`bundle name`)
-TODO : photo
+![Image](https://github.com/user-attachments/assets/927f3129-dfad-4358-aaf6-11f6570a8364)
 
 ### 2-4. 로그인 활성화 ([kakao login prerequisite](https://developers.kakao.com/docs/latest/ko/kakaologin/prerequisite))
 여기서 로그인 활성화와, OpenID Connect 활성화 설정을 둘다 ON으로 설정하시면 되겠습니다.
 
-## Step 4. 각종 키 취합
+## Step 3. 각종 키 취합
 
-### 4-1. iOS `ios/social_login_template_react_native/Info.plist`
+### 3-1. iOS `ios/social_login_template_react_native/Info.plist`
 
 다음과 같이 수정합니다 :
 ```diff
@@ -163,7 +165,7 @@ TODO : photo
 +	<string>{kakao native key}</string>
 ```
 
-### 4-2. `android/app/src/main/res/values/strings.xml`
+### 3-2. `android/app/src/main/res/values/strings.xml`
 
 다음과 같이 수정합니다.
 ```diff
