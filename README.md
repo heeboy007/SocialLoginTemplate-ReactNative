@@ -4,6 +4,11 @@
 여기서 `변수 이름`처럼 하이라이팅 되어있거나 {변수 이름} 감싸져 있는 것은 실제로 그런 변수로 그 값을 치환하시면 되겠습니다.\
 (당연히 따옴표나 중괄호는 생략하시리라 믿습니다.)
 
+## Supported platforms
+
+![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
+![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)
+
 ## Step 1: 이름 설정
 
 ### 1-1. 앱 이름 : `your app name`.

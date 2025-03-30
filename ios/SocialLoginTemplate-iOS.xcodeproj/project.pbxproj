@@ -12,6 +12,7 @@
 		5C4B8F1AD763BCAA62D62C83 /* Pods_SocialLoginTemplate_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C1AF622471603C16BB89940 /* Pods_SocialLoginTemplate_iOS.framework */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		BC5E16F62D996A1F00CF4993 /* NaverUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5E16F52D996A1F00CF4993 /* NaverUtil.swift */; };
 		BC6D9A922D992ECB00960190 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC6D9A912D992ECB00960190 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = social_login_template_react_native/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A4B151AE4AB1556C38ACAC35 /* Pods-SocialLoginTemplate-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLoginTemplate-iOS.debug.xcconfig"; path = "Target Support Files/Pods-SocialLoginTemplate-iOS/Pods-SocialLoginTemplate-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		AC7097DCCD4CFA22497BA2EC /* Pods-SocialLoginTemplate-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLoginTemplate-iOS.release.xcconfig"; path = "Target Support Files/Pods-SocialLoginTemplate-iOS/Pods-SocialLoginTemplate-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		BC5E16F52D996A1F00CF4993 /* NaverUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NaverUtil.swift; path = social_login_template_react_native/NaverUtil.swift; sourceTree = "<group>"; };
 		BC6D9A912D992ECB00960190 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "social_login_template_react_native/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -44,6 +46,7 @@
 		13B07FAE1A68108700A75B9A /* social_login_template_react_native */ = {
 			isa = PBXGroup;
 			children = (
+				BC5E16F52D996A1F00CF4993 /* NaverUtil.swift */,
 				BC6D9A912D992ECB00960190 /* GoogleService-Info.plist */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
@@ -250,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC5E16F62D996A1F00CF4993 /* NaverUtil.swift in Sources */,
 				761780ED2CA45674006654EE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

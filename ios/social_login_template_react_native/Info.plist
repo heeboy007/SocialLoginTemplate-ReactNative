@@ -28,6 +28,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>kakaof5cf66291e82b2e229516da69751d152</string>
+				<string>navero2S0IvFB8cXUKnyKos7D</string>
 				<string>com.googleusercontent.apps.442955487135-b81rvnfkfeiu8keltbgl71c7h0flknnf</string>
 			</array>
 		</dict>
@@ -38,9 +39,11 @@
 	<string>f5cf66291e82b2e229516da69751d152</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-	   <string>kakaokompassauth</string>
-	   <string>storykompassauth</string>
-	   <string>kakaolink</string>
+		<string>kakaokompassauth</string>
+		<string>storykompassauth</string>
+		<string>kakaolink</string>
+		<string>naversearchapp</string>
+ 		<string>naversearchthirdlogin</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

@@ -8,6 +8,7 @@ import { RootStackParamList } from "../../context/RootNavigator";
 import GoogleButton from "../../context/auth/buttons/GoogleButton";
 import KakaoButton from "../../context/auth/buttons/KakaoButton";
 import LogoutButton from "../../context/auth/buttons/LogoutButton";
+import NaverButton from "../../context/auth/buttons/NaverButton";
 
 function Connection(): React.JSX.Element {
     const { is_login, social_result, login_message } = useAuthContext();
@@ -35,6 +36,7 @@ function Connection(): React.JSX.Element {
             
             <GoogleButton/>
             <KakaoButton/>
+            <NaverButton/>
             <LogoutButton/>
         </View>
     </SafeAreaView>

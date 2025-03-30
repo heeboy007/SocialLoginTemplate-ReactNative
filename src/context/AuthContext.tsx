@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { LoginMethod, setToLogoutState, SignInState } from "./auth/signInResult";
 import { googleSignIn, googleSignOut } from "./auth/google";
 import { kakaoSignIn, kakaoSignOut } from "./auth/kakao";
+import { naverSignIn, naverSignOut } from "./auth/naver";
 
 interface AuthContext {
     social_result: SignInState;
@@ -36,6 +37,8 @@ function AuthContextProvider({ children } : { children: React.JSX.Element }) : R
                     return googleSignIn();
                 case "kakao":
                     return kakaoSignIn();
+                case "naver":
+                    return naverSignIn();
                 default:
                     return setToLogoutState();
             }
@@ -67,6 +70,7 @@ function AuthContextProvider({ children } : { children: React.JSX.Element }) : R
                 setMethod(null);
                 break;
             case "naver":
+                await naverSignOut();
                 setMethod(null);
                 break;
         }

@@ -8,4 +8,7 @@ declare module "*.svg" {
 declare module '@env' {
     export const GOOGLE_WEB_OAUTH: string;
     export const GOOGLE_IOS_OAUTH: string;
+    export const NAVER_CONSUMER_KEY: string;
+    export const NAVER_CONSUMER_SECRET: string;
+    export const NAVER_IOS_URL_SCHEME: string;
 }
