@@ -11,14 +11,8 @@ import LogoutButton from "../../context/auth/buttons/LogoutButton";
 import NaverButton from "../../context/auth/buttons/NaverButton";
 
 function Connection(): React.JSX.Element {
-    const { is_login, social_result, login_message } = useAuthContext();
+    const { message, socialSignIn } = useAuthContext();
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-
-    useEffect(() => {
-        if(is_login){
-            //TO onboard or whatever...
-        }
-    }, [is_login])
 
     return <SafeAreaView className="bg-gray-100 p-4 min-h-full min-w-full flex flex-col">
         <View className="mx-auto w-full bg-white shadow-lg rounded-lg flex-grow flex justify-center items-center">
@@ -27,11 +21,15 @@ function Connection(): React.JSX.Element {
             </Text>
 
             <Text className="mx-auto my-5 font-bold text-center text-base color-slate-600 max-w-[50vw]">
-                {JSON.stringify(social_result)}
+                id_token:{socialSignIn?.id_token || "토큰이 없습니다."}
             </Text>
 
             <Text className="mx-auto my-5 font-bold text-center text-base color-slate-600 max-w-[50vw]">
-                {login_message}
+                access_token:{socialSignIn?.access_token || "토큰이 없습니다."}
+            </Text>
+
+            <Text className="mx-auto my-5 font-bold text-center text-base color-slate-600 max-w-[50vw]">
+                {message}
             </Text>
             
             <GoogleButton/>

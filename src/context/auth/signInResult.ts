@@ -1,28 +1,31 @@
 
 type LoginMethod = "google" | "naver" | "kakao";
 
-interface SignInState {
+interface SignIn {
     message: string;
     login_method: LoginMethod | null; // has to be either kakao, google, naver, or "null"
+}
 
-    cancel: boolean; //by something expected
-    error?: string; //by something unexpectd
+interface SignInState extends SignIn {
+    id_token?: string | null;
+    access_token?: string | null;
+}
 
-    id?: string;
-    access_token?: string;
-    profile_picture?: string;
+interface SignInError extends SignIn {
+    error?: Error | unknown;
 }
 
 const setToLogoutState = (): SignInState => {
     return {
         login_method: null,
-        cancel: false,
         message: "logout"
     }
 }
 
 export type {
+    SignIn,
     SignInState,
+    SignInError,
     LoginMethod
 }
 

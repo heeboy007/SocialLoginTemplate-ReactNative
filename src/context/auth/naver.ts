@@ -7,11 +7,14 @@ const naverSignIn = async (): Promise<SignInState> => {
         try {
             const response: NaverLoginResponse = await NaverLogin.login();
 
-            console.log(JSON.stringify(response));
-            resolve({ cancel: false, message: JSON.stringify(response), login_method: "naver" });
+            if(response.isSuccess){
+                //note that naver only gives access token
+                resolve({ message: "로그인 성공", login_method: "naver", access_token: response.successResponse?.accessToken });
+            } else {
+                reject({ message: response.failureResponse?.message, login_method: "naver" });
+            }
         } catch(error) {
-            console.log(JSON.stringify(error));
-            reject({ cancel: true, message: "알 수 없는 에러가 발생 했습니다.", login_method: "naver" });
+            reject({ message: "알 수 없는 에러가 발생 했습니다.", login_method: "naver", error });
         }
     });
 };

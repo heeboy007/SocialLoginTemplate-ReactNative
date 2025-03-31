@@ -4,7 +4,7 @@ import {
     isSuccessResponse,
     statusCodes,
 } from '@react-native-google-signin/google-signin';
-import { SignInState } from './signInResult';
+import { SignInError, SignInState } from './signInResult';
 
 // Somewhere in your code
 function googleSignIn(): Promise<SignInState> {
@@ -13,27 +13,33 @@ function googleSignIn(): Promise<SignInState> {
             await GoogleSignin.hasPlayServices();
             const response = await GoogleSignin.signIn();
             if (isSuccessResponse(response)) {
-                resolve({ cancel: false, message: JSON.stringify(response.data), login_method: "google" });
+                resolve({ message: "로그인 성공", login_method: "google", id_token: response.data.idToken, access_token: response.data.serverAuthCode });
             } else {
-                reject({ cancel: true, message: "로그인 취소", login_method: "google" });
+                const singInError: SignInError = { message: "로그인 취소", login_method: "google" };
+                reject(singInError);
             }
         } catch (error) {
-            console.log(error);
-            console.log(JSON.stringify(error));
             if (isErrorWithCode(error)) {
                 switch (error.code) {
                 case statusCodes.IN_PROGRESS:
-                    reject({ cancel: true, message: "로그인 중입니다. 조금 기다려 주세요.", login_method: "google" });
+                    const singInErrorPo: SignInError = { message: "로그인 중입니다. 조금 기다려 주세요.", login_method: "google", error: error };
+                    reject(singInErrorPo);
                     break;
                 case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
-                    reject({ cancel: true, message: "Play 서비스를 불러올 수 없습니다. 안드로이드의 경우, Google Play및 관련 앱들을 업데이트 해주세요.", login_method: "google" });
+                    const singInErrorPl: SignInError = { message: "Play 서비스를 불러올 수 없습니다. 안드로이드의 경우, Google Play및 관련 앱들을 업데이트 해주세요.", 
+                        login_method: "google", error: error };
+                    reject(singInErrorPl);
                     break;
                 default:
-                    reject({ cancel: true, message: "로그인 도중, 알 수 없는 에러가 발생 했습니다.", login_method: "google" });
+                    const singInErrorUn: SignInError = { message: "로그인 도중, 알 수 없는 에러가 발생 했습니다.", 
+                        login_method: "google", error: error };
+                    reject(singInErrorUn);
                     break;
                 }
             } else {
-                reject({ cancel: true, message: "알 수 없는 에러가 발생 했습니다.", login_method: "google" });
+                const singInError: SignInError = { message: "로그인 도중, 알 수 없는 에러가 발생 했습니다.", 
+                    login_method: "google", error: error };
+                reject(singInError);
             }
         }
     })

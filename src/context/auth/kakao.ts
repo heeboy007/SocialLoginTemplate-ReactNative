@@ -6,11 +6,9 @@ const kakaoSignIn = async (): Promise<SignInState> => {
         try {
             const token: KakaoOAuthToken = await login();
 
-            console.log(JSON.stringify(token));
-            resolve({ cancel: false, message: JSON.stringify(token), login_method: "kakao" });
+            resolve({ message: "로그인 성공", login_method: "kakao", id_token: token.idToken, access_token: token.accessToken });
         } catch(error) {
-            console.log(JSON.stringify(error));
-            reject({ cancel: true, message: "알 수 없는 에러가 발생 했습니다.", login_method: "kakao" });
+            reject({ message: "알 수 없는 에러가 발생 했습니다.", login_method: "kakao", error });
         }
     });
 };

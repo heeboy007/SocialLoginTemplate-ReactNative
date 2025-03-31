@@ -11,4 +11,5 @@ declare module '@env' {
     export const NAVER_CONSUMER_KEY: string;
     export const NAVER_CONSUMER_SECRET: string;
     export const NAVER_IOS_URL_SCHEME: string;
+    export const BACKEND_URL: string;
 }

@@ -1,99 +1,113 @@
-import { useQuery } from "@tanstack/react-query";
+
 import { createContext, useContext, useEffect, useState } from "react"
-import { LoginMethod, setToLogoutState, SignInState } from "./auth/signInResult";
+import { LoginMethod, setToLogoutState, SignInError, SignInState } from "./auth/signInResult";
 import { googleSignIn, googleSignOut } from "./auth/google";
 import { kakaoSignIn, kakaoSignOut } from "./auth/kakao";
 import { naverSignIn, naverSignOut } from "./auth/naver";
 
 interface AuthContext {
-    social_result: SignInState;
+    socialSignIn: SignInState;
     // backend_result: SignInResult;
 
-    is_login: boolean;
-    login_message: string;
+    isLogin: boolean;
+    message: string;
 
     login: (method: LoginMethod) => void;
-    logout: () => Promise<void>;
+    logout: () => void;
 }
 
 const AuthContext = createContext<AuthContext>({} as AuthContext);
 
 function AuthContextProvider({ children } : { children: React.JSX.Element }) : React.JSX.Element {
-    const [ method, setMethod ] = useState<LoginMethod | null>(null);
-    const [ loginMessage, setLoginMessage ] = useState<string>("");
+    const [ method, setMethod ] = useState<LoginMethod | null>();
     const [ token, setToken ] = useState<string | null>(null);
 
-    const { 
-        isPending: social_pending, 
-        isError: social_is_error, 
-        error: social_error,
-        data: social_result, 
-        refetch: social_login 
-    } = useQuery<SignInState>({
-        queryKey: ['social_login_query', method],
-        queryFn: async () => {
-            switch(method) {
-                case "google":
-                    return googleSignIn();
-                case "kakao":
-                    return kakaoSignIn();
-                case "naver":
-                    return naverSignIn();
-                default:
-                    return setToLogoutState();
-            }
-        },
-    });
+    const [ message, setMessage ] = useState<string>("");
 
-    // const { isPending: backend_pending, isError: backend_is_error, error: backend_error, data: backend_result, refetch: backend_login } = useQuery({
-    //     queryKey: ['backend_login_query', social_result],
-    //     queryFn: async () => {
-    //         return {}
-    //     }, //TOOD: implement to give information to backend.
-    //     refetchInterval: 1000 * 60 * 60,
-    //     enabled: true
-    // });
+    const [ socialIsError, setSocialIsError ] = useState<boolean>(false);
+    const [ socialIsPending, setSocialIsPending ] = useState<boolean>(false);
+    const [ socialError, setSocialError ] = useState<SignInError | null>(null);
+    const [ socialSignIn, setSocialSignIn ] = useState<SignInState | null>(null);
     
-    const login = (method: LoginMethod) => {
-        setMethod(method);
-        social_login();
-    };
-
-    const logout = async () => {
+    const signInMethod = async (method: LoginMethod) => {
         switch(method) {
             case "google":
-                await googleSignOut();
-                setMethod(null);
-                break;
+                return googleSignIn();
             case "kakao":
-                await kakaoSignOut();
-                setMethod(null);
-                break;
+                return kakaoSignIn();
             case "naver":
-                await naverSignOut();
+                return naverSignIn();
+        }
+    }
+
+    const login = (login_with: LoginMethod) => {
+        if(!method && !socialIsPending) {
+            setMethod(login_with);
+            setSocialIsPending(true);
+            signInMethod(login_with).then((singin) => {
+                setSocialIsError(false);
+                setSocialSignIn(singin);
+    
+                setSocialIsPending(false);
+            }).catch((error) => {
+                setSocialIsError(true);
+                setSocialError(error);
+    
+                setSocialIsPending(false);
+            })
+        }
+    };
+
+    const signOutMethod = async () => {
+        switch(method) {
+            case "google":
+                return googleSignOut();
+            case "kakao":
+                return kakaoSignOut();
+            case "naver":
+                return naverSignOut();
+        }
+    }
+
+
+    const logout = () => {
+        if(method && socialSignIn && !socialIsPending ) {
+            setSocialIsPending(true);
+            signOutMethod().then(() => {
+                setSocialIsError(false);
                 setMethod(null);
-                break;
+                setSocialSignIn(null);
+    
+                setSocialIsPending(false);
+            }).catch((error) => {
+                setSocialIsError(true);
+                setSocialError(error);
+    
+                setSocialIsPending(false);
+            })
         }
     };
 
     useEffect(() => {
-        if(social_is_error) {
-            setLoginMessage(`social_error method ${method}`);
+        if(socialIsPending) {
+            setMessage("서버에 요청 중...");
         } else {
-            if(social_pending) {
-                setLoginMessage(`pending... method ${method}`);
+            if(socialIsError && socialError) {
+                setMessage(socialError?.message || "알 수 없는 에러");
+            } else if(!!socialSignIn) {
+                setMessage(method + "으로 로그인 성공");
             } else {
-                setLoginMessage(`idle method ${method}`);
+                setMessage("로그아웃");
             }
         }
-    }, [social_pending, social_error, method]);
+    }, [socialError, socialIsError, socialIsPending, socialSignIn])
 
     return <AuthContext.Provider value={{
-        social_result: social_result,
+        socialSignIn: socialSignIn,
         // backend_result: backend_result,
 
-        is_login: !!social_login,
-        login_message: loginMessage,
+        isLogin: !socialIsError && !socialIsPending && !!socialSignIn,
+        message: message,
 
         login: login,
         logout: logout
