@@ -29,6 +29,13 @@
 +  override fun getMainComponentName(): String = "{your app name}"
 ```
 
+3. In `android/app/src/main/res/values/strings.xml`
+```diff
+<resources>
++   <string name="app_name">{your app name}</string>
+</resources>
+```
+
 ### 1-2. 안드로이드 패키지 이름 : `package name`
 여기서는 아래와 같은 패키지 이름으로 되어있습니다.
 ```
@@ -147,9 +154,32 @@ TODO : Photo
 ### 2-4. 로그인 활성화 ([kakao login prerequisite](https://developers.kakao.com/docs/latest/ko/kakaologin/prerequisite))
 여기서 로그인 활성화와, OpenID Connect 활성화 설정을 둘다 ON으로 설정하시면 되겠습니다.
 
-## Step 3. 각종 키 취합
+## Step 3. [Naver React Native](https://github.com/crossplatformkorea/react-native-naver-login) 세팅
+아래의 과정에서, 다운로드 URL은 당장 없을 경우 바로 등재하지 않아도 무방합니다. 따라서,
+다운로드 주소 :
+```
+https://localhost
+```
+콜백 주소 :
+```
+https://naver.com/api/callback/url/sample
+```
+등을 이용하시면 되겠습니다.
 
-### 3-1. iOS `ios/social_login_template_react_native/Info.plist`
+### 3-1. [네이버 개발자 센터](https://developers.naver.com/main/)에서 프로젝트 생성
+여기서 앱을 생성할때, 우선은 안드로이드만 등록(`package name`, `keystore hash`) 해주세요.\
+그럼 `naver client id`와 `naver client secert`을 발급 받을 수 있습니다.
+
+### 3-2. iOS url scheme 만들기
+이후에, iOS를 같이 등록할 때 url scheme을 설정하시면 됩니다. 간단하게 아래와 같이 작성하시면 됩니다.\
+아래의 Info.plist 수정의 간편함을 위해서, 이렇게 설정해주세요.
+```
+naver{naver client id}
+```
+
+## Step 4. 각종 키 취합
+
+### 4-1. iOS `ios/social_login_template_react_native/Info.plist`
 
 다음과 같이 수정합니다 :
 ```diff
@@ -160,6 +190,7 @@ TODO : Photo
 			<key>CFBundleURLSchemes</key>
 			<array>
 +				<string>kakao{kakao native key}</string>
++				<string>naver{naver client id}</string>
 +				<string>{google iOS OAuth client id}</string>
 			</array>
 		</dict>
@@ -170,12 +201,24 @@ TODO : Photo
 +	<string>{kakao native key}</string>
 ```
 
-### 3-2. `android/app/src/main/res/values/strings.xml`
+### 4-2. `android/app/src/main/res/values/strings.xml`
 
 다음과 같이 수정합니다.
 ```diff
 <resources>
-+   <string name="app_name">{your app name}</string>
+   <string name="app_name">{your app name}</string>
 +   <string name="kakao_app_key">{kakao native key}</string>
 </resources>
+```
+
+### 4-3. `.env`
+
+다음과 같이 수정합니다.
+```diff
+GOOGLE_WEB_OAUTH=[google Web OAuth client id]
+GOOGLE_IOS_OAUTH=[google iOS OAuth client id]
+
++NAVER_CONSUMER_KEY={naver client id}
++NAVER_CONSUMER_SECRET={naver client secert}
++NAVER_IOS_URL_SCHEME=naver{naver client id}
 ```
