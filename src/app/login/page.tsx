@@ -11,7 +11,7 @@ import LogoutButton from "../../context/auth/buttons/LogoutButton";
 import NaverButton from "../../context/auth/buttons/NaverButton";
 
 function Connection(): React.JSX.Element {
-    const { message, socialSignIn } = useAuthContext();
+    const { message, token } = useAuthContext();
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
     return <SafeAreaView className="bg-gray-100 p-4 min-h-full min-w-full flex flex-col">
@@ -21,11 +21,7 @@ function Connection(): React.JSX.Element {
             </Text>
 
             <Text className="mx-auto my-5 font-bold text-center text-base color-slate-600 max-w-[50vw]">
-                id_token:{socialSignIn?.id_token || "토큰이 없습니다."}
-            </Text>
-
-            <Text className="mx-auto my-5 font-bold text-center text-base color-slate-600 max-w-[50vw]">
-                access_token:{socialSignIn?.access_token || "토큰이 없습니다."}
+                token:{token || "토큰이 없습니다."}
             </Text>
 
             <Text className="mx-auto my-5 font-bold text-center text-base color-slate-600 max-w-[50vw]">

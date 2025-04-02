@@ -13,6 +13,7 @@ function googleSignIn(): Promise<SignInState> {
             await GoogleSignin.hasPlayServices();
             const response = await GoogleSignin.signIn();
             if (isSuccessResponse(response)) {
+                console.log(JSON.stringify(response.data));
                 resolve({ message: "로그인 성공", login_method: "google", id_token: response.data.idToken, access_token: response.data.serverAuthCode });
             } else {
                 const singInError: SignInError = { message: "로그인 취소", login_method: "google" };
